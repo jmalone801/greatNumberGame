@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Game</title>
+    <style>
+        * {
+            text-align: center;
+        }
+        .wrongNum {
+            width: 200px;
+            background-color: red;
+            color: white;
+            padding: 5px;
+        }
+        .correctNum {
+            width: 200px;
+            background-color: green;
+            color: white;
+            padding: 5px;
+        }
+        #flex {
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to the Great Number Game!</h1>
+    <h2>I am thinking of a number between 1-100</h2>
+    <h2>Take a guess at what it is!</h2>
+    <form action="/results" method="post">
+        <input for="results" type="number" name="results">
+        <input id="results" type="submit" name="results">
+    </form>
+    <div id="flex">
+        {% if "results" in session: %}
+            {% if session["results"] == session["num"] %}
+                <div>
+                    <h2 class="correctNum">Correct number!</h2>
+                    <a href="/clear">Play Again</a>
+                </div>
+            {% elif session["results"] < session["num"] %}
+                <div>
+                    <h2 class="wrongNum">Sorry, too low!</h2>
+                </div>
+            {% else %}
+                <div>
+                    <h2 class="wrongNum">Sorry, too high!</h2>
+                </div>
+            {% endif %}
+        {% endif %}
+    </div>
+</body>
+</html>
